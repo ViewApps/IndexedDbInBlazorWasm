@@ -1,0 +1,101 @@
+﻿@page "/User/Add"
+@page "/User/{id:int}/Edit"
+@using IndexedDb.Services
+
+@inject IUserIndexedDbService UserService
+@inject NavigationManager NavigationManager
+
+
+@if (_user == null)
+{
+    <p class="badge badge-info p-2">Loading ...</p>
+}
+else
+{
+    <div class="col-md-7 col-lg-5 mx-auto mt-5">
+        <div class="card border rounded-lg p-3">
+            <div class="card-header">
+                <h3 class="text-center border-bottom mb-4">@_type User</h3>
+            </div>
+            <div class="card-body">
+                <EditForm model="_user" OnValidSubmit="FormSubmitHandler">
+                    <DataAnnotationsValidator />
+
+                    <div class="py-2">
+                        <InputText @bind-Value="_user.Name" class="form-control" placeholder="Name..." />
+                        <ValidationMessage For="(()=>_user.Name)" />
+                    </div>
+                    <div class="py-2">
+                        <InputText @bind-Value="_user.Mobile" class="form-control" placeholder="Mobile..." />
+                        <ValidationMessage For="(()=>_user.Mobile)" />
+                    </div>
+                    <div class="py-2">
+                        <InputText @bind-Value="_user.Email" class="form-control" placeholder="Email..." />
+                        <ValidationMessage For="(()=>_user.Email)" />
+                    </div>
+                    <div class="py-2">
+                        @if (_isProcessing)
+                        {
+                            <button type="submit" class="btn btn-success btn-block disabled"> Please Wait...</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-success btn-block">@_type User</button>
+                        }
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    Data.User _user;
+
+    string _type;
+    bool _isProcessing;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id == null)
+        {
+            _user = new Data.User
+            {
+                Name = "Ali Reza",
+                Email = "AliReza@Email.com",
+                Mobile = "09123456789"
+            };
+            _type = "Add";
+        }
+        else
+        {
+            _user = await UserService.GetUser(Id.Value);
+            _type = "Edit";
+        }
+    }
+
+    private async Task FormSubmitHandler()
+    {
+        _isProcessing = true;
+        if (Id == null)
+        {
+            await UserService.AddUser(_user);
+
+            _isProcessing = false;
+        }
+        else
+        {
+            _user.Id = Id.Value;
+            await UserService.UpdateUser(_user);
+
+            _isProcessing = false;
+        }
+
+        NavigationManager.NavigateTo("/Users");
+
+    }
+}

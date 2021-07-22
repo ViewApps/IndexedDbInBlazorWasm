@@ -1,0 +1,53 @@
+﻿@page "/Users"
+@using IndexedDb.Services
+
+@inject IUserIndexedDbService UserService
+<h3>Users</h3>
+
+@if (_users is null)
+{
+    <p class="badge badge-info p-2">Loading ...</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead class="bg-dark text-light text-center">
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Mobile</td>
+            <td>Email</td>
+            <td>Created</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in _users)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Mobile</td>
+                <td>@item.Email</td>
+                <td>@item.Created</td>
+                <td class="text-center">  
+                    <NavLink href="@($"/User/{item.Id}/Edit")" class="btn btn-warning btn-sm px-2 mx-1">Edit</NavLink>
+                    <NavLink href="@($"/User/{item.Id}/Remove")" class="btn btn-danger btn-sm px-2 mx-1">Remove</NavLink>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>  
+    <NavLink href="/User/Add" class="btn btn-outline-primary w-100 mt-3">Add New User</NavLink>
+}
+
+
+@code {
+    private List<Data.User> _users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _users = await UserService.GetUsers();
+    }
+
+}
