@@ -31,14 +31,14 @@ else
                 <td>@item.Email</td>
                 <td>@item.Created</td>
                 <td class="text-center">  
-                    <NavLink href="@($"/User/{item.Id}/Edit")" class="btn btn-warning btn-sm px-2 mx-1">Edit</NavLink>
-                    <NavLink href="@($"/User/{item.Id}/Remove")" class="btn btn-danger btn-sm px-2 mx-1">Remove</NavLink>
+                    <NavLink href="@($"User/{item.Id}/Edit")" class="btn btn-warning btn-sm px-2 mx-1">Edit</NavLink>
+                    <NavLink href="@($"User/{item.Id}/Remove")" class="btn btn-danger btn-sm px-2 mx-1">Remove</NavLink>
                 </td>
             </tr>
         }
         </tbody>
     </table>  
-    <NavLink href="/User/Add" class="btn btn-outline-primary w-100 mt-3">Add New User</NavLink>
+    <NavLink href="User/Add" class="btn btn-outline-primary w-100 mt-3">Add New User</NavLink>
 }
 
 
