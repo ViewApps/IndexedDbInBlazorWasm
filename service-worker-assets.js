@@ -177,7 +177,7 @@
       "url": "_framework\/TG.Blazor.IndexedDB.dll"
     },
     {
-      "hash": "sha256-wwKmj+Y0IzNqa6ufo+AuoNnvQLYmh47cTcNznxsml\/0=",
+      "hash": "sha256-1I1kR8GeLsDtPswTij9yfEUoFOg5aUx2\/zSz2XTuyWE=",
       "url": "_framework\/IndexedDb.dll"
     },
     {
@@ -277,7 +277,7 @@
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
-      "hash": "sha256-STx2K10DVsQezFwiPCTuvhHV4TnDz2RqnW7GO6mvxYU=",
+      "hash": "sha256-D2JUnG5U4SxDm3O\/Koo1N5\/ptECsDMEh8dwhVeTej6k=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -285,5 +285,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "O\/0+jg3A"
+  "version": "qUnv1obf"
 };
