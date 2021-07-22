@@ -19,7 +19,7 @@ jobs:
     - name: Publish .NET Core Project
       run: dotnet publish IndexedDb.csproj -c Release -o release --nologo
     - name: Commit wwwroot to GitHub Pages
-      uses:  ViewApps/IndexedDbInBlazorWasm@1
+      uses:  ViewApps/IndexedDbInBlazorWasm
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
